@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+	<div class="panel panel-default">
+		<div class="panel-heading"> <h2>Mantenimiento de Bot {{bot.botname}}</h2>
+		</div>
+		<div class="panel-body"><p>Descripcion: {{ bot.botdescription }} <p>
+		</div>
+	</div>
+	{% if botdetails %}
+	<div class="container">
+		<table class="table table-striped table-hover">
+		<thead>
+			<tr>
+				<th>Secuencia</th>
+				<th>Mensaje</th>
+				<th>Accion posterior</th>
+				<th>Validadores</th>
+				<th>Instruccion siguiente</th>
+				<th>Editar</th>
+				<th>Eliminar</th>
+			</tr>
+		<tbody>
+			{% for detail in botdetails %}
+				{% include '_botdetailsdata.html' %}
+			{% endfor %}
+		</tbody>
+		</table>
+	</div>
+	{% endif %}
+	<div class="row">
+		<form class="form-horizontal" action="" method="post">
+		 {{ form.hidden_tag() }}
+			{{ form.sequence.label }}
+			{{ form.sequence(size=2) }}
+			{% for error in form.sequence.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+			{{ form.mesg.label }}
+			{{ form.mesg(size=500) }}
+			{% for error in form.mesg.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+			{{ form.post.label }}
+			{{ form.post(size=500) }}
+			{% for error in form.post.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+			{{ form.vali.label }}
+			{{ form.vali(size=500) }}
+			{% for error in form.vali.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+			{{ form.next.label }}
+			{{ form.next(size=2) }}
+			{% for error in form.next.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+			<br>
+			{{ form.submit() }}
+		</form>
+	</div>
+	<br>
+	<a href="{{ url_for('main.bots') }}"><button type="button" class="btn btn-md">Regresar</button></a>
+{% endblock %}

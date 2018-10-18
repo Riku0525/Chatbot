@@ -1,0 +1,23 @@
+	<tr valign="center">
+		<td>{{ detail.order }}</td>
+            {% if detail.mesg|length > 30 %}
+                <td>{{ detail.mesg|truncate(30, True) }}</td>
+            {% else %}
+                <td>{{ detail.mesg }}</td>
+            {% endif %}
+		    {% if detail.post|length > 20 %}
+                <td>{{ detail.post|truncate(20, True) }}</td>
+            {% else %}
+                <td>{{ detail.post }}</td>
+            {% endif %}
+		    {% if detail.vali|length > 20 %}
+                <td>{{ detail.vali|truncate(20, True) }}</td>
+            {% else %}
+                <td>{{ detail.vali }}</td>
+            {% endif %}
+		<td>{{ detail.next }}</td>
+		<td><a href="{{ url_for('main.instruction', botname=bot.botname, detail=detail.id) }}">
+		<button type="button" class="btn btn-primary btn-md">Editar instrucción</button></a></td>
+		<td><a href="{{ url_for('main.dinstruction', botname=bot.botname, detail=detail.id) }}">
+		<button type="button" class="btn btn-warning btn-md">Eliminar instrucción</button></a><span></td>
+	</tr>

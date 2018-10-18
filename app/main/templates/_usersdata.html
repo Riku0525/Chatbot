@@ -1,0 +1,16 @@
+	<tr valign="center">
+		<td>{{ user.username }}</td>
+		<td>{{ user.email }}</td>
+		<td>
+		{% if user.userlevel == 1 %}
+			Usuario Administrador
+		{% else %}
+			Usuario General
+		{% endif %}
+		</td>
+		{% if user.username == current_user.username %}
+		<td><button type="button" class="btn btn-warning btn-md disabled">Eliminar usuario</button></td>
+		{% else %}
+		<td><button type="button" class="btn btn-warning btn-md">Eliminar usuario</button></td>
+		{% endif %}
+	</tr>

@@ -1,0 +1,176 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block title %}
+	{% if title %}
+		{{ title }} - ChatBot ANS
+	{% else %}
+		ChatBot ANS
+	{% endif %}
+{% endblock %}
+
+{% block styles %}
+{{super()}}
+	 <link rel="stylesheet" href="{{ url_for('static', filename='css/chatNv20.css') }}">
+{% endblock %}
+
+{% block scripts %}
+{{super()}}
+{{ moment.include_moment() }}
+{{ moment.lang("es") }}
+	 <script src="{{ url_for('static', filename='scripts/chatv05.js') }}"></script>
+     <script>
+        setTimeout(function(){
+            var elementExists = document.getElementById("chat");
+            if (elementExists) {
+                $.post('/main/beginchat', {
+                }).done(function(response) {
+                    $('#chat_id').val(response['id']);
+                    displayMessage(response['message'], "bot");
+                }).fail(function() {
+                    displayMessage("Servicio de Chatbot no disponible por el momento", "bot");
+                });
+            }
+        }, 1000);
+        
+        function ChatKey(e){
+            e=e||window.event;
+            var key = e.keyCode;
+            if(key==13){
+                event.preventDefault();
+                var userInput = document.getElementById('newMessage');
+                var text = userInput.value;
+                text = text.replace(/(\r\n|\n|\r)/gm, ""); // elimina caracteres erroenos
+                var text2 = text.toLowerCase();           // convierte todo a minusculas
+                if (text2) {
+                    // Muestra el mensaje en el chat y busca la respuesta
+                    displayMessage(text, "user");
+                    userInput.value = '';
+                    userMessage(text2);
+                }
+            }
+        }
+        
+        function userSend() {
+            var userInput = document.getElementById('newMessage');
+            var text = userInput.value;
+            text = text.replace(/(\r\n|\n|\r)/gm, ""); // elimina caracteres erroenos
+            var text2 = text.toLowerCase();            // convierte todo a minusculas
+            if (text2) {
+                // Muestra el mensaje en el chat y busca la respuesta
+                displayMessage(text, "user");
+                userInput.value = '';
+                userMessage(text2);
+            } 
+        }
+        
+        function userButton(e){
+            var userInput = document.getElementById('newMessage');
+            var text = document.getElementById(e.id).value;                  // obtiene el valor del boton
+            text = text.replace(/(\r\n|\n|\r)/gm, ""); // elimina caracteres erroenos
+            var text2 = text.toLowerCase();            // convierte todo a minusculas
+            displayMessage(text, "user");
+            userInput.value = '';
+            userMessage(text2);
+        }
+        
+        function userMessage(text){
+             var chatInput = document.getElementById('chat_id').value;
+            $.get('/main/responduser', {
+                chat: chatInput,
+                message: text
+            }).done(function(response) {
+                displayMessage(response['message'], "bot");
+            }).fail(function() {
+                displayMessage("Servicio de Chatbot no disponible por el momento", "bot");
+            });
+        }
+        
+        function displayMessage(text, user) {
+            var chat = document.getElementById('chatlog');
+            var bubble = document.createElement('div');
+            bubble.className = 'message'; // Da clase basica al mensaje
+            // Da formato al mensaje
+            if (user === "bot") {
+                var name = "MyS-Bot";     
+                var lista = text.split(";");
+                var i=0, j=0, k=0
+                var hasbutton = false
+                var listaTemp = new Array();
+                for (i=0; i < lista.length; i++){
+                    if(lista[i] === "BUTTON"){
+                        if(!hasbutton){
+                            listaTemp[j] = "<br>";
+                            j++;
+                            hasbutton = true;
+                        }
+                        i++;
+                        var buttons = lista[i].split(":");
+                        for (k=0; k < buttons.length; k++){
+                            listaTemp[j] = "  <button type='button' class='btn btn-info' onClick='userButton(this)' value='"+buttons[k]+"' id='"+buttons[k]+"' >"+buttons[k]+"</button>";
+                            j++;
+                        }
+                    }
+                    else{
+                        listaTemp[j] = lista[i];
+                    }
+                    j++;
+                }
+                text = listaTemp.join("")
+                bubble.innerHTML = "<li class='support'><div>"+ text + "</div></li>";
+            } else {
+                bubble.innerHTML = "<li class='user'><div>"+ text + "</div></li>";
+            }
+            chat.appendChild(bubble);
+            var chatscroll = document.getElementById('chatlist');
+            console.log(chatscroll.scrollHeigth);
+            console.log(chatscroll.scrollTop);
+            chatscroll.scrollTop = chatscroll.scrollHeight;
+            document.getElementById('newMessage').focus();
+        }
+    </script>
+{% endblock %}
+
+{% block navbar %}
+	<nav class="navbar navbar-default">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="{{ url_for('main.index') }}">ChatBot ANS</a>
+			</div>
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li><a href="{{ url_for('main.index') }}">Inicio</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					{% if current_user.is_authenticated %}
+						<li><a href="{{ url_for('auth.options') }}">Opciones</a></li>
+						<li><a href="{{ url_for('auth.logout') }}">Cerrar sesión</a></li>
+					{% else %}
+						<li><a href="{{ url_for('auth.login') }}">Iniciar sesión</a></li>
+					{% endif %}
+				</ul>
+			</div>
+		</div>
+	</nav>
+{% endblock %}
+
+{% block content %}
+	<div class="container">
+		{% with messages = get_flashed_messages() %}
+        {% if messages %}
+			{% for message in messages %}
+			<div class="alert alert-info" role="alert">{{ message }}</div>
+			{% endfor %}
+		{% endif %}
+		{% endwith %}
+		
+		{# application content needs to be provided in the app_content block #}
+		{% block app_content %}
+		{% endblock %}
+	</div>
+{% endblock %}

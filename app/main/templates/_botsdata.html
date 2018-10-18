@@ -1,0 +1,7 @@
+	<tr valign="center">
+		<td>{{ bot.botname }}</td>
+		<td>{{ bot.botdescription }}</td>
+		<td><a href="{{ url_for('main.bot', botname=bot.botname) }}">
+		<button type="button" class="btn btn-primary btn-md">Editar Bot</button></a></td>
+		<td><button type="button" class="btn btn-warning btn-md">Eliminar Bot</button></td>
+	</tr>

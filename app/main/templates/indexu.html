@@ -1,0 +1,71 @@
+{%  extends "base.html" %}
+
+{% block app_content %}
+    <!-- <h2>Bienvenido {{ current_user.username }}</h2>
+	<!-- CHAT GRANDE -->
+		<div class="chatwindow" id="chat">
+        <div class="head">
+            <div class="title">
+				<div class="btn-group pull-left">
+					<img src="{{ url_for('static', filename='images/chat.svg') }}" style="width: 25px;height: 25px; color:#000">
+				</div>
+				</span>
+				ChatBot de Soporte ANS
+				<div class="btn-group pull-right">
+					<a href="{{ url_for('auth.logout') }}"><img class="xShow" src="{{ url_for('static', filename='images/cerrar.jpg') }}"></a>
+				</div>
+			</div>
+        </div>
+        <div class="body chat-window" id="chatlist">
+          <div class="chats">
+            <ul class="messages clearfix" id="chatlog">
+            </ul>
+            <div class="input">
+              <form class="form-inline" id="messageSupport">
+                <input type="hidden" id="chat_id" value="x">
+                <div class="form-group col-xs-5">
+                    <input type="text" autocomplete="off" class="form-control" id="newMessage" placeholder="Escriba su mensaje" onkeypress="return ChatKey(event)">
+                </div>
+                <div class="form-group col-xs-2">
+                    <a href="javascript:userSend();"><button type="button" class="btn btn-success">Enviar</button></a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+    </div>
+	<!--  -->
+	<!-- CHAT PEQUEÑO
+	<div class="chatbubble" id="chat">
+        <div class="unexpanded">
+            <div class="title">
+				<div class="btn-group pull-left">
+					<img src="{{ url_for('static', filename='images/chat.svg') }}" style="width: 25px;height: 25px; color:#000">
+				</div>
+				</span>
+				ChatBot de Soporte ANS
+				<div class="btn-group pull-right">
+					<a href="{{ url_for('auth.logout') }}"><img class="xShow" src="{{ url_for('static', filename='images/cerrar.jpg') }}"></a>
+				</div>
+			</div>
+        </div>
+        <div class="expanded chat-window" id="chatlist">
+          <div class="chats">
+            <ul class="messages clearfix" id="chatlog">
+            </ul>
+            <div class="input">
+              <form class="form-inline" id="messageSupport">
+                <input type="hidden" id="chat_id" value="x">
+                <div class="form-group col-xs-5">
+                    <input type="text" autocomplete="off" class="form-control" id="newMessage" placeholder="Escriba su mensaje" onkeypress="return ChatKey(event)">
+                </div>
+                <div class="form-group col-xs-2">
+                    <a href="javascript:userSend();"><button type="button" class="btn btn-success">Enviar</button></a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+    </div>
+	 -->
+{% endblock %}

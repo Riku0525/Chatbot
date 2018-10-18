@@ -1,0 +1,294 @@
+/* NAVBAR */
+.navbar-default {
+    background-color: #007abe;
+    border-color: #e7e7e7;
+}
+.navbar-default .navbar-nav>li>a {
+    color: #f5f5f5;
+}
+
+.navbar-default .navbar-brand {
+    color: #022863;
+}
+
+/* PANEL */
+.panel-default>.panel-heading {
+    color: #fff;
+    background-color: #0186d0;
+    border-color: #010435;
+}
+
+.list-group-item {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: -1px;
+    background-color: #2fb0c1;
+    border: 1px solid #ddd;
+}
+
+/* GENERAL */
+a,
+a:focus,
+a:hover {
+  color: #fff;
+}
+
+html,
+body {
+  height: 100%;
+  background-color: #fff;
+}
+
+body {
+  color: #226090;
+  text-align: center;
+}
+
+.site-wrapper {
+  display: table;
+  width: 100%;
+  height: 100%; /* For at least Firefox */
+  min-height: 100%;
+  box-shadow: inset 0 0 5rem rgba(0,0,0,.5);
+  background: url(bg.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.site-wrapper-inner {
+  display: table-cell;
+  vertical-align: top;
+}
+.cover-container {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.inner {
+  padding: 2rem;
+}
+
+.xShow{
+  -webkit-transition: all .25s linear;
+  -moz-transition: all .25s linear;
+  transition: all .25s linear;
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  transform: translateZ(0);
+}.xShow:hover{
+background-color: #fff;
+opacity: .7;
+-moz-transform: scale(1.1);
+-webkit-transform: scale(1.1);
+transform: scale(1.1);
+}
+
+/* Chat Pequeño */
+.chatbubble {
+    position: fixed;
+    bottom: 0;
+    right: 30px;
+    transform: translateY(300px);
+    transition: transform .3s ease-in-out;
+}
+
+.chatbubble .title {
+  color: #fff;
+  text-align: center;
+}
+
+.chatbubble.opened {
+    transform: translateY(0)
+}
+.chatbubble .unexpanded {
+    display: block;
+    background-color: #007abe;
+    padding: 10px 15px 10px;
+    position: relative;
+    cursor: pointer;
+    width: 350px;
+    border-radius: 10px 10px 0 0;
+}
+.chatbubble .expanded {
+    height: 300px;
+    width: 350px;
+    background-color: #fff;
+    text-align: left;
+    padding: 10px;
+    color: #333;
+    text-shadow: none;
+    font-size: 14px;
+}
+.chatbubble .chat-window {
+  overflow: auto;
+}
+
+.chatbubble .messages {
+    display: none;
+    list-style: none;
+    margin: 0 0 50px;
+    padding: 0;
+}
+.chatbubble .messages li {
+    width: 85%;
+    float: left;
+    padding: 10px;
+    border-radius: 5px 5px 5px 0;
+    font-size: 14px;
+    background: #c9f1e6;
+    margin-bottom: 10px;
+}
+.chatbubble .messages li .sender {
+    font-weight: 600;
+}
+.chatbubble .messages li.support {
+    float: left;
+    padding: 10px;
+    border-radius: 5px 5px 5px 0;
+    font-size: 14px;
+    background: #c9f1e6;
+    margin-bottom: 10px;
+}
+
+.chatbubble .messages li.user {
+    float: right;
+    text-align: right;
+    color: #333;
+    background-color: #d5e5ec;
+    border-radius: 5px 5px 0 5px;
+}
+
+.chatbubble .chats .input {
+    position: absolute;
+    bottom: 0;
+    padding: 10px;
+    left: 0;
+    width: 100%;
+    background: #f0f0f0;
+    display: none;
+}
+.chatbubble .chats .input .form-group {
+    width: auto;
+}
+.chatbubble .chats .input input {
+    width: 100%;
+}
+.chatbubble .chats .input button {
+    width: auto;
+}
+
+.chatbubble .chats {
+  display: none;
+}
+
+.chatbubble .chats.active {
+  display: block;
+}
+
+/*Chat GRANDE */
+.chatwindow {
+    position: fixed;
+    top: 65%;
+    left:50%;
+    transform: translate(-50%,-50%);
+}
+
+
+@media screen and (min-width: 800px) {
+    .chatwindow {
+        position: fixed;
+        top: 50%;
+        left:50%;
+        transform: translate(-50%,-50%);
+    }
+}
+
+.chatwindow .title {
+  color: #fff;
+  text-align: center;
+}
+
+.chatwindow .head {
+    display: block;
+    background-color: #007abe;
+    padding: 10px 15px 10px;
+    position: relative;
+    width: 350px;
+    border-radius: 10px 10px 0 0;
+}
+
+.chatwindow .body {
+    height: 300px;
+    width: 350px;
+    background-color: #fff;
+    text-align: left;
+    padding: 10px;
+    color: #333;
+    text-shadow: none;
+    font-size: 14px;
+}
+
+.chatwindow .chat-window {
+  overflow: auto;
+}
+
+.chatwindow .messages {
+    list-style: none;
+    margin: 0 0 50px;
+    padding: 0;
+}
+.chatwindow .messages li {
+    width: 85%;
+    float: left;
+    padding: 10px;
+    border-radius: 5px 5px 5px 0;
+    font-size: 14px;
+    background: #c9f1e6;
+    margin-bottom: 10px;
+}
+.chatwindow .messages li .sender {
+    font-weight: 600;
+}
+.chatwindow .messages li.support {
+    float: left;
+    padding: 10px;
+    border-radius: 5px 5px 5px 0;
+    font-size: 14px;
+    background: #c9f1e6;
+    margin-bottom: 10px;
+}
+
+.chatwindow .messages li.user {
+    float: right;
+    text-align: right;
+    color: #333;
+    background-color: #d5e5ec;
+    border-radius: 5px 5px 0 5px;
+}
+
+.chatwindow .chats .input {
+    position: absolute;
+    bottom: 0;
+    padding: 10px;
+    left: 0;
+    width: 100%;
+    background: #f0f0f0;
+}
+.chatwindow .chats .input .form-group {
+    width: auto;
+}
+.chatwindow .chats .input input {
+    width: 100%;
+}
+.chatwindow .chats .input button {
+    width: auto%;
+}
+
+.chatwindow .chats {
+}
+
+.chatwindow .chats.active {
+  display: block;
+}

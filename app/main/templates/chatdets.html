@@ -1,0 +1,33 @@
+{%  extends "base.html" %}
+
+{% block app_content %}
+		<div class="chatwindow">
+        <div class="head">
+            <div class="title">
+				<div class="btn-group pull-left">
+					<img src="{{ url_for('static', filename='images/chat.svg') }}" style="width: 25px;height: 25px; color:#000">
+				</div>
+				</span>
+				ChatBot de Soporte ANS
+				<div class="btn-group pull-right">
+					<a href="{{ url_for('main.chats') }}"><img class="xShow" src="{{ url_for('static', filename='images/cerrar.jpg') }}"></a>
+				</div>
+			</div>
+        </div>
+        <div class="body chat-window" id="chatlist">
+          <div class="chats">
+            <ul class="messages clearfix" id="chatlog">
+            {% for detail in chatdetail %}
+                {% include '_chatdetails.html' %}
+            {% endfor %}
+            </ul>
+          </div>
+        </div>
+    </div>
+    {% if service %}
+        Servicio solicitado, Folio: {{ service.id }}, Estatus:{% if service.status == 0 %}Abierto{% else %}Cerrado{% endif %}
+        (Debug, se borrara: {{ service.id }}||{{ service.bot }}||{{ service.var }}||{{ service.email }}||{{ service.status }})
+    {% else %}
+        No se genero servicio en este Chat
+    {% endif %}
+{% endblock %}

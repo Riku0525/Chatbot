@@ -1,0 +1,9 @@
+      	<tr valign="center">
+		<td>{{ chat[2] }}</td>
+		<td>{{ chat[3] }}</td>
+        <td>{{ moment(chat[0]).format('LLL') }}</td>
+        <td><a href="{{ url_for('main.detchat', id=chat[1]) }}">
+        <button type="button" class="btn btn-info btn-md">Detalles</button></a></td>
+		<td><a href="{{ url_for('main.dchat', id=chat.id) }}">
+        <button type="button" class="btn btn-warning btn-md">Eliminar Chat</button></a></td>
+	</tr>

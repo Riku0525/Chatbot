@@ -1,0 +1,7 @@
+	<div class="message">
+    {% if detail.author == "Bot" %}
+        <li class='support'>
+    {% else %}
+        <li class='user'>
+    {% endif %}
+    <div>{{ detail.message }}</div></li></div>
